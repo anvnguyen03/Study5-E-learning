@@ -1,0 +1,36 @@
+<div id="test-comments" class="test-comments-wrapper contentblock">
+    <h4 id="bình-luận">Bình luận</h4>
+
+    <form *ngIf="isLoggedIn; else notLogin"
+        [formGroup]="commentForm"
+        (ngSubmit)="addComment()"
+        class="mt-2 md-comment-input jqform jqcomment-form" data-reload-html="#obj-comments-4590"
+        data-target="#md-comments-box" data-submitting="false">
+
+        <input name="csrfmiddlewaretoken" type="hidden"
+            value="qtrGrvuIqCPwWQ1BeFp3AmyxUmZDL3mV852Yx4EvNm6RZeFBaX5JAVA13EnegYuD">
+
+        <div class="input-group">
+            <textarea formControlName="content" rows="1"
+                class="form-control custom-control jqcomment-textarea"
+                placeholder="Chia sẻ cảm nghĩ của bạn ..."></textarea>
+            <div class="input-group-append">
+                <button class="input-group-addon btn btn-primary jqcomment-submit">Gửi</button>
+            </div>
+        </div>
+    </form>
+
+    <ng-template #notLogin>
+        <p>Vui lòng <a routerLink="/login">đăng nhập</a> để comment</p>
+    </ng-template>
+
+    <br>
+
+    <div id="obj-comments" class="jqhtml-loader">
+        <app-comment 
+            *ngFor="let comment of comments"
+            [comment]="comment"
+            [replies]="comment.replies"
+            [isLoggedIn]="isLoggedIn"></app-comment>
+    </div>
+</div>

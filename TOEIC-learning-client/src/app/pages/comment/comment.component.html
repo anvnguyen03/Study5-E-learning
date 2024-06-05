@@ -1,0 +1,76 @@
+<div class="comment-item media root-comment">
+    <span class="comment-avatar">None</span>
+    <div class="comment-body media-body">
+        <div class="comment-username">
+            <strong>{{comment.username}}</strong>,
+            {{comment.date | date}}
+        </div>
+        <div class="comment-content prewrap">{{comment.content}}</div>
+        <div *ngIf="isLoggedIn" class="comment-reply-action">
+            <a href="#comment-reply-form-{{comment.id}}" data-bs-toggle="collapse"
+                aria-expanded="false"><strong>Trả lời</strong></a>
+
+            <div class="comment-reply-form collapse" id="comment-reply-form-{{comment.id}}">
+                <form
+                    class="mt-2 md-comment-input jqform jqcomment-form"
+                    data-reload-html="#obj-comments-4590" data-target="#md-comments-box"
+                    data-submitting="false">
+                    <input name="csrfmiddlewaretoken" type="hidden"
+                        value="VqQqTTE6ftUxP0PhqpuKaTbqJ2JcpiteD2rIZsOTCdbSSothmHaqasdUSk7NUdBW">
+                    <input  type="hidden" name="reply_to" value="{{comment.id}}">
+                    <div class="input-group">
+                        <textarea name="content" rows="1"
+                            class="form-control custom-control jqcomment-textarea"
+                            placeholder="Chia sẻ cảm nghĩ của bạn ..."></textarea>
+                        <div class="input-group-append">
+                            <button type="submit"
+                                class="input-group-addon btn btn-primary jqcomment-submit">Gửi</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="comment-replies reply-comment" *ngIf="replies.length > 0">
+    <!-- @for (reply of replies; track $index) { -->
+        <!-- <div class="comment-item media reply-comment"> -->
+            <app-comment
+                *ngFor="let reply of replies"
+                [comment]="reply"
+                [isLoggedIn]="isLoggedIn"></app-comment>
+            <!-- <span class="comment-avatar">None</span>
+            <div class="comment-body media-body">
+                <div class="comment-username">
+                    <strong>{{reply.username}}</strong>,
+                    {{reply.date | date}}
+                </div>
+                <div class="comment-content prewrap">{{reply.content}}</div>
+                <div *ngIf="isLoggedIn" class="comment-reply-action">
+                    <a href="#comment-reply-form-{{reply.id}}" data-bs-toggle="collapse"
+                        aria-expanded="false"><strong>Trả lời</strong></a>
+                    <div class="comment-reply-form collapse" id="comment-reply-form-{{reply.id}}">
+                        <form
+                            class="mt-2 md-comment-input jqform jqcomment-form"
+                            data-reload-html="#obj-comments-4590" data-target="#md-comments-box"
+                            data-submitting="false">
+                            <input name="csrfmiddlewaretoken" type="hidden"
+                                value="VqQqTTE6ftUxP0PhqpuKaTbqJ2JcpiteD2rIZsOTCdbSSothmHaqasdUSk7NUdBW">
+                            <input type="hidden" name="reply_to" value="{{reply.id}}">
+                            <div class="input-group">
+                                <textarea name="content" rows="1"
+                                    class="form-control custom-control jqcomment-textarea"
+                                    placeholder="Chia sẻ cảm nghĩ của bạn ..."></textarea>
+                                <div class="input-group-append">
+                                    <button type="submit"
+                                        class="input-group-addon btn btn-primary jqcomment-submit">Gửi</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div> -->
+        <!-- </div> -->
+    <!-- } -->
+</div>
